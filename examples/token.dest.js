@@ -1,0 +1,1 @@
+module.exports = "DISCORD_VALID_BOT_TOKEN_GOES_HERE"
