@@ -5,8 +5,10 @@
   "main": "./index.js",
   "exports": {
     ".": [
-        { "require": "./index.js" },
-        "./index.js"
+      {
+        "require": "./index.js"
+      },
+      "./index.js"
     ]
   },
   "engines": {
@@ -31,6 +33,7 @@
     "add-subtract-date": "^1.0.14"
   },
   "devDependencies": {
-    "eris": "^0.11.2"
+    "eris": "^0.11.2",
+    "lorem-ipsum": "^2.0.3"
   }
 }
