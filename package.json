@@ -1,16 +1,8 @@
 {
   "name": "discord-paginator",
-  "version": "0.9.0",
+  "version": "0.8.0",
   "description": "Creates paginated content in discord using embeds",
   "main": "./index.js",
-  "exports": {
-    ".": [
-      {
-        "require": "./index.js"
-      },
-      "./index.js"
-    ]
-  },
   "engines": {
     "node": ">=8.0.0"
   },

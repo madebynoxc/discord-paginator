@@ -7,15 +7,19 @@ const defaults = {
     bot: { },
     colors: require('./lib/colors'),
     expires: 600,
+    confirmExpires: 60,
     check: 5,
+    pgnEmbed: { title: 'Pagination Dialog' },
+    cfmEmbed: { title: 'Confirmation Dialog' },
+    pgnButtons: ['back', 'forward', 'close'],
     chars: {
         first: '⏪',
         back: '⬅',
         forward: '➡',
         last: '⏩',
         close: '🚫',
-        accept: '✅',
-        reject: '❌'
+        confirm: '✅',
+        decline: '❌'
     }
 }
 
