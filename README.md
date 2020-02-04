@@ -54,6 +54,45 @@ You can use any JS Discord library if you wrap your bot object and call appropri
 
 More examples can be found in [the examples folder](https://github.com/NoxCaos/discord-paginator/tree/master/examples).
 
+Using Confirmation
+---------
+This package also contains confirmator module that can create confirm/decline dialog for discord. It works in a really similar way to pagination.
+```js
+const Eris = require('eris')
+const paginator = require('discord-paginator')
+
+const bot = new Eris('BOT_TOKEN')
+const pgn = paginator.create({ bot }) // create options go here
+
+/* fired when bot is connected and ready to read the messages*/
+bot.on('ready', event => {
+    console.log('Bot ready')
+})
+
+/* fired when message is created */
+bot.on('messageCreate', async (msg) => {
+    if(msg.content.startsWith('/question')) {
+        const embed = { title: 'Simple Example' }
+        pgn.addConfirmation(msg.author.id, msg.channel.id, { 
+            question: "Would you like to confirm this?", 
+            embed,
+            onConfirm: () => {
+                pgn.sendConfirm(msg.channel.id, 'Yaay!')
+                console.log('Dialog has been confirmed')
+            }
+        })
+    }
+})
+
+/* fired when reaction is added to the message */
+bot.on('messageReactionAdd', async (msg, emoji, userID) => {
+    pgn.trigger(userID, msg, emoji.name) // we catch reaction and call 'trigger' on pagination
+})
+
+bot.connect() // connect bot to discord
+```
+More examples can be found in [the examples folder](https://github.com/NoxCaos/discord-paginator/tree/master/examples).
+
 Running Examples
 ---------
 You can clone this repository and run the examples
@@ -62,8 +101,7 @@ git clone git@github.com:NoxCaos/discord-paginator.git
 npm install
 cp examples/token.dest.js examples/token.js
 ```
-Then open `examples/token.js` and put on your Discord bot token. You can obtain it [here](https://discordapp.com/developers/applications)
-Then:
+Then open `examples/token.js` and put on your Discord bot token. You can obtain it [here](https://discordapp.com/developers/applications). Then:
 ```
 node examples/simplepagination
 ```
@@ -75,9 +113,18 @@ Customize pagination by passing appropriate options when initializing and creati
 ### Create Options
 ```
 {
-    bot,      // [Object] (required) bot object for creating methods/reactions
-    expires: 600, // [Integer] (optional) how long till dialog expires (in seconds)
+    bot,          // [Object] (required) bot object for creating methods/reactions
+    expires: 600, // [Integer] (optional) how long till pagination expires (in seconds)
+    confirmExpires: 60 // [Integer] (optional) how long till confirmation dialog expires (in seconds)
     check: 5,     // [Integer] (optional) how often should expiration tick run (in seconds)
+    
+    /* 
+    * These options are defaults for all dialogs. 
+    * You can override them for each dialog exclusively 
+    */
+    pgnEmbed: { title: 'Pagination Dialog' },   // [Object] (optional) default pagination embed
+    cfmEmbed: { title: 'Confirmation Dialog' }, // [Object] (optional) default confirmation embed
+    pgnButtons: ['back', 'forward', 'close'],   // [Object] (optional) default pagination buttons
     
     /* [Object] (optional) object with default integer colors for embeds */
     colors: { 
@@ -94,8 +141,8 @@ Customize pagination by passing appropriate options when initializing and creati
         forward: '➡',
         last: '⏩',
         close: '🚫',
-        accept: '✅',
-        reject: '❌'
+        confirm: '✅',
+        decline: '❌'
     },
     
     rct,    // [Function] (optional) custom reaction subscription function (see below)
@@ -103,7 +150,8 @@ Customize pagination by passing appropriate options when initializing and creati
 }
 ```
 You can specify custom functions for reactions and trigger. They both should be sharing the same reaction tree.
-Implement your own `rct` and `trigger` functions if you are planning to intercept more reactions for further use. See more about implementation [here](https://github.com/NoxCaos/discord-paginator/blob/master/lib/rct.js)
+Implement your own `rct` and `trigger` functions if you are planning to intercept more reactions for further use. See more about implementation [here](https://github.com/NoxCaos/discord-paginator/blob/master/lib/rct.js).
+
 Subscribe to any reaction with `rct(reaction_char, (userID, msg) => callback())`
 
 ### Pagination Options
@@ -125,13 +173,38 @@ Subscribe to any reaction with `rct(reaction_char, (userID, msg) => callback())`
 ```
 You can specify custom function that will be called when page has changed. By default it will swap the `embed.description` to appropriate value from `pages`. 
 See [this example](https://github.com/NoxCaos/discord-paginator/blob/master/examples/customswitch.js) for details
+### Confirmation Options
+```
+{
+    question // [String] question to ask. 
+             // If not specified, embed's description field will be used
+             
+    embed, // [Object] (optional) embed that show the question
+    
+    /* 
+    * [Object] (optional) IDs of users that are allowed to react
+    * if not specified, it will use message author ID
+    * can have separate permissions to confirm and decline message
+    */
+    perms: { confirm: [], decline: [] },
+    
+    onConfirm,  // [Function] called when dialog was confirmed
+    onDecline,  // [Function] (optional) called when dialog was declined
+}
+```
 
 Extra methods
 ---------
 ### getPages(array, [split = 10])
 Will turn long array into pages. 
+
 `split` indicates how many items will be on one page (default 10)
 See more in [this example](https://github.com/NoxCaos/discord-paginator/blob/master/examples/arraytopage.js)
+### sendConfirm(channelID, [msg= 'Operation was confirmed!'])
+Will send a confirm-formatted message to the channel.
+### sendDecline(channelID, [msg= 'Operation was declined'])
+Will send a decline-formatted message to the channel.
+See more in [this example](https://github.com/NoxCaos/discord-paginator/blob/master/examples/confirmparams.js)
 
 License
 -------
