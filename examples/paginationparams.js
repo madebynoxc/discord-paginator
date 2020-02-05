@@ -15,6 +15,7 @@ const main = () => {
         bot,
         expires: 60, // will make dialog expire in 1 minute
         check: 10, // setting dialog expiration check to 10 seconds
+        wrap: false, // should pagination wrap when hitting the ends
         chars: { //replacing reaction characters
             first: '⏮️',
             back: '◀️',

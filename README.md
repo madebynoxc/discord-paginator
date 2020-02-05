@@ -114,10 +114,11 @@ Customize pagination by passing appropriate options when initializing and creati
 ### Create Options
 ```
 {
-    bot,          // [Object] (required) bot object for creating methods/reactions
-    expires: 600, // [Integer] (optional) how long till pagination expires (in seconds)
-    confirmExpires: 60 // [Integer] (optional) how long till confirmation dialog expires (in seconds)
-    check: 5,     // [Integer] (optional) how often should expiration tick run (in seconds)
+    bot,                // [Object] (required) bot object for creating methods/reactions
+    expires: 600,       // [Integer] (optional) how long till pagination expires (in seconds)
+    confirmExpires: 60  // [Integer] (optional) how long till confirmation dialog expires (in seconds)
+    check: 5,           // [Integer] (optional) how often should expiration tick run (in seconds)
+    wrap: true,         // [Boolean] (optional) enables transition to the first page after last and vice versa
     
     /* 
     * These options are defaults for all dialogs. 
@@ -146,7 +147,7 @@ Customize pagination by passing appropriate options when initializing and creati
         decline: '❌'
     },
     
-    rct,    // [Function] (optional) custom reaction subscription function (see below)
+    rct,        // [Function] (optional) custom reaction subscription function (see below)
     trigger,    // [Function] (optional) custom reaction trigger function (see below)
 }
 ```

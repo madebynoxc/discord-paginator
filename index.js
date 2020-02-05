@@ -9,6 +9,7 @@ const defaults = {
     expires: 600,
     confirmExpires: 60,
     check: 5,
+    wrap: true,
     pgnEmbed: { title: 'Pagination Dialog' },
     cfmEmbed: { title: 'Confirmation Dialog' },
     pgnButtons: ['back', 'forward', 'close'],
