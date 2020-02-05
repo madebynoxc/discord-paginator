@@ -1,6 +1,7 @@
 
 discord-paginator
 ====
+[![NPM](https://img.shields.io/npm/v/discord-paginator)](https://www.npmjs.com/package/discord-paginator)   [![Discord Server](https://img.shields.io/discord/351871492536926210)](https://discord.gg/xQAxThF)
 
 Creates paginated content for your Discord bot. Highly customizable, easy to use. Works best with [Eris](https://github.com/abalabahaha/eris)
 
@@ -9,7 +10,7 @@ Installing
 
 You will need NodeJS 8 or higher. 
 ```
-npm install discord-paginator
+npm i discord-paginator
 ```
 
 Using
