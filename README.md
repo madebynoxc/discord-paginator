@@ -182,6 +182,7 @@ See [this example](https://github.com/NoxCaos/discord-paginator/blob/master/exam
              // If not specified, embed's description field will be used
              
     embed, // [Object] (optional) embed that show the question
+    check, // [Function] (optional) used for double check (see below)
     
     /* 
     * [Object] (optional) IDs of users that are allowed to react
@@ -194,6 +195,7 @@ See [this example](https://github.com/NoxCaos/discord-paginator/blob/master/exam
     onDecline,  // [Function] (optional) called when dialog was declined
 }
 ```
+Double check will ensure that your data did not change between request and confirm. See [this example](https://github.com/NoxCaos/discord-paginator/blob/master/examples/doublecheck.js) for details
 
 Extra methods
 ---------
