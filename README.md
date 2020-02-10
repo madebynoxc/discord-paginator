@@ -191,8 +191,8 @@ See [this example](https://github.com/NoxCaos/discord-paginator/blob/master/exam
     */
     perms: { confirm: [], decline: [] },
     
-    onConfirm,  // [Function] called when dialog was confirmed
-    onDecline,  // [Function] (optional) called when dialog was declined
+    onConfirm(userID),  // [Function] called when dialog was confirmed
+    onDecline(userID),  // [Function] (optional) called when dialog was declined
 }
 ```
 Double check will ensure that your data did not change between request and confirm. See [this example](https://github.com/NoxCaos/discord-paginator/blob/master/examples/doublecheck.js) for details

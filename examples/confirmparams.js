@@ -27,13 +27,13 @@ const main = () => {
                 embed: { title: 'Confirm Example' },
 
                 /* Define your own events */
-                onConfirm: () => {
+                onConfirm: (x) => {
                     pgn.sendConfirm(msg.channel.id, 'Yaay!')
-                    console.log('Dialog has been confirmed')
+                    console.log(`Dialog has been confirmed by ${x}`)
                 },
-                onDecline: () => {
+                onDecline: (x) => {
                     pgn.sendDecline(msg.channel.id, 'Oh No!')
-                    console.log('Dialog has been declined')
+                    console.log(`Dialog has been declined by ${x}`)
                 },
 
                 perms: {
