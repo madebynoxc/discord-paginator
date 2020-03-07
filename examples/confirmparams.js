@@ -48,6 +48,10 @@ const main = () => {
         pgn.trigger(userID, msg, emoji.name)
     })
 
+    pgn.emitter.on('resolve', async (res, obj) => {
+        console.log(`Dialog by ${obj.userID} was ${res? 'confirmed' : 'declined'}`)
+    })
+
     bot.connect()
 }
 

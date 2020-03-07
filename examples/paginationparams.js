@@ -52,6 +52,10 @@ const main = () => {
         pgn.trigger(userID, msg, emoji.name)
     })
 
+    pgn.emitter.on('switch', async (obj) => {
+        console.log(`Switched to page #${obj.pagenum}`)
+    })
+
     bot.connect()
 }
 
