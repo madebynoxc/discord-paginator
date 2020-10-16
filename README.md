@@ -193,6 +193,7 @@ See [this example](https://github.com/NoxCaos/discord-paginator/blob/master/exam
     
     onConfirm(userID),  // [Function] called when dialog was confirmed
     onDecline(userID),  // [Function] (optional) called when dialog was declined
+    onTimeout(userID),  // [Function] (optional) called when dialog times out, sends decline ID
 }
 ```
 Double check will ensure that your data did not change between request and confirm. See [this example](https://github.com/NoxCaos/discord-paginator/blob/master/examples/doublecheck.js) for details
