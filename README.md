@@ -133,6 +133,7 @@ Customize pagination by passing appropriate options when initializing and creati
         question, 
         accept, 
         reject, 
+        timeout,
         pagination
     },
 
@@ -193,6 +194,7 @@ See [this example](https://github.com/NoxCaos/discord-paginator/blob/master/exam
     
     onConfirm(userID),  // [Function] called when dialog was confirmed
     onDecline(userID),  // [Function] (optional) called when dialog was declined
+    onTimeout(),        // [Function] (optional) called when dialog has timed out
 }
 ```
 Double check will ensure that your data did not change between request and confirm. See [this example](https://github.com/NoxCaos/discord-paginator/blob/master/examples/doublecheck.js) for details
